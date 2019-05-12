@@ -1,0 +1,74 @@
+package:
+  name: pylada
+  version: 1.0
+
+source:
+  git_url: https://github.com/pylada/pylada-light.git
+  # path: ../pylada-light
+
+build:
+  # entry_points:
+  # Put any entry points (scripts to be generated automatically) here. The
+  # syntax is module:function.  For example
+  #
+  # - msgpack-python = msgpack-python:main
+  #
+  # Use number of commits since last tag as build number -- imperfect but mostly monotonic ...
+  number: "{{GIT_DESCRIBE_NUMBER}}"
+
+requirements:
+  build:
+    - cmake
+    - "{{ compiler('c') }}"
+    - "{{ compiler('cxx') }}"
+    - "{{ compiler('fortran') }}"
+    - python=3.6
+    - setuptools
+    - mpi4py
+    - numpy
+    - ipython
+    - cython
+    - pytest
+    - eigen
+    - nbconvert
+    - nbformat
+    - py
+    - jupyter
+    - scipy
+    - pytest-bdd
+    - quantities
+    - f90nml
+  run:
+    - python=3.6
+    - "{{ pin_compatible('numpy') }}"
+    - mpi4py
+    - ipython
+    - eigen
+    - nbconvert
+    - nbformat
+    - py
+    - jupyter
+    - scipy
+    - pytest-bdd
+    - quantities
+    - f90nml
+  test:
+  # Python imports
+  imports:
+    - pylada
+
+  commands:
+    # You can put test commands to be run here.  Use this to test that the
+    # entry points work.
+    # You can also put a file called run_test.py in the recipe that will be run
+    # at test time.
+    # requires:
+    # Put any additional test requirements here.  For example
+    # - nosetests
+
+about:
+  home: https://github.com/pylada/pylada-light
+  license: GNU General Public License v3.0
+# See
+# http://docs.continuum.io/conda/build.html for
+# more information about meta.yaml
